@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/AugustoArguello/cacao-settlement-reconciliation/config"
+	customMw "github.com/AugustoArguello/cacao-settlement-reconciliation/middleware"
 	"github.com/AugustoArguello/cacao-settlement-reconciliation/routers"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -16,7 +17,9 @@ func main() {
 
 	e := echo.New()
 	e.HideBanner = true
+	e.HTTPErrorHandler = customMw.CustomHTTPErrorHandler
 
+	e.Use(customMw.RequestID())
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 	e.Use(middleware.CORS())
