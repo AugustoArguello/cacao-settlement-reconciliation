@@ -1,0 +1,118 @@
+{
+  "generated_at": "2026-02-24T19:36:10.456759Z",
+  "seed": 20260215,
+  "total_transactions": 312,
+  "total_settlements": 10,
+  "total_discrepancies": 26,
+  "total_impact_usd": 46776.78,
+  "discrepancies": [
+    {
+      "type": "missing_settlement",
+      "transaction_ids": [
+        "txn_adyen_0193_487849b7",
+        "txn_stripe_0174_4f7360f2",
+        "txn_adyen_0211_fcdd4577",
+        "txn_stripe_0035_556c8bf1",
+        "txn_stripe_0075_03cad851"
+      ],
+      "expected_impact_usd": 12343.7,
+      "description": "5 transactions aged 5-20 days excluded from all settlement files"
+    },
+    {
+      "type": "amount_mismatch",
+      "transaction_ids": [
+        "txn_stripe_0049_c0eb2411",
+        "txn_stripe_0157_b8a06c29",
+        "txn_stripe_0106_5871c1b4",
+        "txn_stripe_0147_3e15ef39"
+      ],
+      "batch_ids": [
+        "batch_002",
+        "batch_003"
+      ],
+      "expected_impact_usd": 8500,
+      "description": "4 settlements with corrupted net amounts"
+    },
+    {
+      "type": "duplicate_settlement",
+      "transaction_ids": [
+        "txn_stripe_0105_69234353",
+        "txn_stripe_0034_5d093e9d",
+        "txn_stripe_0081_1bb96477"
+      ],
+      "batch_ids": [
+        "batch_003",
+        "batch_007"
+      ],
+      "expected_impact_usd": 7722.24,
+      "description": "3 transactions appearing in 2 different settlement batches"
+    },
+    {
+      "type": "orphaned_settlement",
+      "transaction_ids": [
+        "txn_phantom_0000_fcb5e15d",
+        "txn_phantom_0001_6c17cdd7",
+        "txn_phantom_0002_ef887f2f"
+      ],
+      "batch_ids": [
+        "batch_001",
+        "batch_002",
+        "batch_003"
+      ],
+      "expected_impact_usd": 5600,
+      "description": "3 settlement entries referencing transaction IDs that do not exist"
+    },
+    {
+      "type": "fee_anomaly",
+      "transaction_ids": [
+        "txn_stripe_0083_b2f4d162",
+        "txn_stripe_0130_127aff39",
+        "txn_stripe_0175_59a32de1",
+        "txn_stripe_0150_6f13abb9"
+      ],
+      "batch_ids": [
+        "batch_003",
+        "batch_001"
+      ],
+      "expected_impact_usd": 3923.45,
+      "description": "4 transactions with processing fees \u003e5% variance from expected rate"
+    },
+    {
+      "type": "currency_conversion_error",
+      "transaction_ids": [
+        "txn_stripe_0129_2aea2ce3",
+        "txn_stripe_0070_59a2da41",
+        "txn_adyen_0207_5a5ee5dc"
+      ],
+      "batch_ids": [
+        "batch_002",
+        "batch_007"
+      ],
+      "expected_impact_usd": 3800.01,
+      "description": "3 transactions with inflated FX rate error applied to gross amount"
+    },
+    {
+      "type": "reserve_hold",
+      "transaction_ids": [],
+      "batch_ids": [
+        "batch_003",
+        "batch_008"
+      ],
+      "expected_impact_usd": 2900,
+      "description": "2 batches with unexpected reserve_hold_amount reducing payout"
+    },
+    {
+      "type": "chargeback_without_notification",
+      "transaction_ids": [
+        "txn_stripe_0052_9e38c314",
+        "txn_adyen_0218_c72d9588"
+      ],
+      "batch_ids": [
+        "batch_001",
+        "batch_008"
+      ],
+      "expected_impact_usd": 1987.38,
+      "description": "2 settlements with chargeback fees but transaction status remains CAPTURED"
+    }
+  ]
+}

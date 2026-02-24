@@ -1,0 +1,134 @@
+{
+  "batch_id": "batch_008",
+  "processor": "adyen",
+  "settlement_date": "2026-02-09T12:00:00Z",
+  "currency": "BRL",
+  "transactions": [
+    {
+      "transaction_id": "txn_adyen_0218_c72d9588",
+      "gross_amount": "4884.84",
+      "net_amount": "4029.87",
+      "fees": [
+        {
+          "type": "processing_fee",
+          "amount": "122.24",
+          "description": "adyen processing fee"
+        },
+        {
+          "type": "chargeback_fee",
+          "amount": "732.73",
+          "description": "chargeback processing fee - disputed transaction"
+        }
+      ],
+      "settlement_date": "2026-02-09T12:00:00Z",
+      "processor_reference": "adyen-ref-8d954217"
+    },
+    {
+      "transaction_id": "txn_adyen_0205_4efa9b52",
+      "gross_amount": "1837.37",
+      "net_amount": "1791.32",
+      "fees": [
+        {
+          "type": "processing_fee",
+          "amount": "46.05",
+          "description": "adyen processing fee"
+        }
+      ],
+      "settlement_date": "2026-02-09T12:00:00Z",
+      "processor_reference": "adyen-ref-9cbfadbb"
+    },
+    {
+      "transaction_id": "txn_adyen_0232_05a41416",
+      "gross_amount": "3475.00",
+      "net_amount": "3388.00",
+      "fees": [
+        {
+          "type": "processing_fee",
+          "amount": "87.00",
+          "description": "adyen processing fee"
+        }
+      ],
+      "settlement_date": "2026-02-09T12:00:00Z",
+      "processor_reference": "adyen-ref-8f02c720"
+    },
+    {
+      "transaction_id": "txn_adyen_0206_4684acb2",
+      "gross_amount": "4036.10",
+      "net_amount": "3935.08",
+      "fees": [
+        {
+          "type": "processing_fee",
+          "amount": "101.02",
+          "description": "adyen processing fee"
+        }
+      ],
+      "settlement_date": "2026-02-09T12:00:00Z",
+      "processor_reference": "adyen-ref-e9a5c78c"
+    },
+    {
+      "transaction_id": "txn_adyen_0228_d3b9636f",
+      "gross_amount": "4758.37",
+      "net_amount": "4639.29",
+      "fees": [
+        {
+          "type": "processing_fee",
+          "amount": "119.08",
+          "description": "adyen processing fee"
+        }
+      ],
+      "settlement_date": "2026-02-09T12:00:00Z",
+      "processor_reference": "adyen-ref-e4d89a38"
+    },
+    {
+      "transaction_id": "txn_adyen_0212_41b89925",
+      "gross_amount": "3961.47",
+      "net_amount": "3862.31",
+      "fees": [
+        {
+          "type": "processing_fee",
+          "amount": "99.16",
+          "description": "adyen processing fee"
+        }
+      ],
+      "settlement_date": "2026-02-09T12:00:00Z",
+      "processor_reference": "adyen-ref-121ac861"
+    },
+    {
+      "transaction_id": "txn_adyen_0197_93f229a6",
+      "gross_amount": "2493.75",
+      "net_amount": "2431.29",
+      "fees": [
+        {
+          "type": "processing_fee",
+          "amount": "62.46",
+          "description": "adyen processing fee"
+        }
+      ],
+      "settlement_date": "2026-02-09T12:00:00Z",
+      "processor_reference": "adyen-ref-e1ca220c"
+    },
+    {
+      "transaction_id": "txn_adyen_0209_d455b627",
+      "gross_amount": "4087.13",
+      "net_amount": "3984.83",
+      "fees": [
+        {
+          "type": "processing_fee",
+          "amount": "102.30",
+          "description": "adyen processing fee"
+        }
+      ],
+      "settlement_date": "2026-02-09T12:00:00Z",
+      "processor_reference": "adyen-ref-5eb0637d"
+    }
+  ],
+  "total_gross": "29534.03",
+  "total_net": "28061.99",
+  "total_fees": "1472.04",
+  "reserve_hold_amount": "7901.91",
+  "report_generated_at": "2026-02-09T18:00:00Z",
+  "metadata": {
+    "report_version": "2.1",
+    "source": "adyen-settlement-api"
+  }
+}

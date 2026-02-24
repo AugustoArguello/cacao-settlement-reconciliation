@@ -1,0 +1,171 @@
+{
+  "batch_id": "batch_003",
+  "processor": "stripe",
+  "settlement_date": "2026-01-31T12:00:00Z",
+  "currency": "USD",
+  "transactions": [
+    {
+      "transaction_id": "txn_stripe_0152_a8e09a79",
+      "gross_amount": "1451.61",
+      "net_amount": "1409.21",
+      "fees": [
+        {
+          "type": "processing_fee",
+          "amount": "42.40",
+          "description": "stripe processing fee"
+        }
+      ],
+      "settlement_date": "2026-01-31T12:00:00Z",
+      "processor_reference": "stripe-ref-0d2af833"
+    },
+    {
+      "transaction_id": "txn_stripe_0083_b2f4d162",
+      "gross_amount": "4875.41",
+      "net_amount": "3681.50",
+      "fees": [
+        {
+          "type": "processing_fee",
+          "amount": "1193.91",
+          "description": "stripe processing fee"
+        }
+      ],
+      "settlement_date": "2026-01-31T12:00:00Z",
+      "processor_reference": "stripe-ref-859b7bf6"
+    },
+    {
+      "transaction_id": "txn_stripe_0081_1bb96477",
+      "gross_amount": "3075.57",
+      "net_amount": "2986.08",
+      "fees": [
+        {
+          "type": "processing_fee",
+          "amount": "89.49",
+          "description": "stripe processing fee"
+        }
+      ],
+      "settlement_date": "2026-01-31T12:00:00Z",
+      "processor_reference": "stripe-ref-ec1d637d"
+    },
+    {
+      "transaction_id": "txn_stripe_0130_127aff39",
+      "gross_amount": "3893.00",
+      "net_amount": "2761.03",
+      "fees": [
+        {
+          "type": "processing_fee",
+          "amount": "1131.97",
+          "description": "stripe processing fee"
+        }
+      ],
+      "settlement_date": "2026-01-31T12:00:00Z",
+      "processor_reference": "stripe-ref-52daa36e"
+    },
+    {
+      "transaction_id": "txn_stripe_0034_5d093e9d",
+      "gross_amount": "1621.58",
+      "net_amount": "1574.25",
+      "fees": [
+        {
+          "type": "processing_fee",
+          "amount": "47.33",
+          "description": "stripe processing fee"
+        }
+      ],
+      "settlement_date": "2026-01-31T12:00:00Z",
+      "processor_reference": "stripe-ref-63649770"
+    },
+    {
+      "transaction_id": "txn_stripe_0000_2e1dbe46",
+      "gross_amount": "757.75",
+      "net_amount": "735.48",
+      "fees": [
+        {
+          "type": "processing_fee",
+          "amount": "22.27",
+          "description": "stripe processing fee"
+        }
+      ],
+      "settlement_date": "2026-01-31T12:00:00Z",
+      "processor_reference": "stripe-ref-deee1214"
+    },
+    {
+      "transaction_id": "txn_stripe_0105_69234353",
+      "gross_amount": "3025.09",
+      "net_amount": "2937.06",
+      "fees": [
+        {
+          "type": "processing_fee",
+          "amount": "88.03",
+          "description": "stripe processing fee"
+        }
+      ],
+      "settlement_date": "2026-01-31T12:00:00Z",
+      "processor_reference": "stripe-ref-14dcf99e"
+    },
+    {
+      "transaction_id": "txn_stripe_0093_4d393f05",
+      "gross_amount": "3245.78",
+      "net_amount": "3151.35",
+      "fees": [
+        {
+          "type": "processing_fee",
+          "amount": "94.43",
+          "description": "stripe processing fee"
+        }
+      ],
+      "settlement_date": "2026-01-31T12:00:00Z",
+      "processor_reference": "stripe-ref-a326c2c6"
+    },
+    {
+      "transaction_id": "txn_stripe_0147_3e15ef39",
+      "gross_amount": "1697.01",
+      "net_amount": "3772.50",
+      "fees": [
+        {
+          "type": "processing_fee",
+          "amount": "49.51",
+          "description": "stripe processing fee"
+        }
+      ],
+      "settlement_date": "2026-01-31T12:00:00Z",
+      "processor_reference": "stripe-ref-1f60319e"
+    },
+    {
+      "transaction_id": "txn_stripe_0058_ebb334d6",
+      "gross_amount": "225.89",
+      "net_amount": "219.04",
+      "fees": [
+        {
+          "type": "processing_fee",
+          "amount": "6.85",
+          "description": "stripe processing fee"
+        }
+      ],
+      "settlement_date": "2026-01-31T12:00:00Z",
+      "processor_reference": "stripe-ref-e786e2a2"
+    },
+    {
+      "transaction_id": "txn_phantom_0002_ef887f2f",
+      "gross_amount": "1866.66",
+      "net_amount": "1812.23",
+      "fees": [
+        {
+          "type": "processing_fee",
+          "amount": "54.43",
+          "description": "stripe processing fee"
+        }
+      ],
+      "settlement_date": "2026-01-31T12:00:00Z",
+      "processor_reference": "ORPHAN-543add3b"
+    }
+  ],
+  "total_gross": "25735.35",
+  "total_net": "25039.73",
+  "total_fees": "2820.62",
+  "reserve_hold_amount": "1450.00",
+  "report_generated_at": "2026-01-31T18:00:00Z",
+  "metadata": {
+    "report_version": "2.1",
+    "source": "stripe-settlement-api"
+  }
+}

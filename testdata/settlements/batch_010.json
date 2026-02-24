@@ -1,0 +1,101 @@
+{
+  "batch_id": "batch_010",
+  "processor": "dlocal",
+  "settlement_date": "2026-02-10T12:00:00Z",
+  "currency": "BRL",
+  "transactions": [
+    {
+      "transaction_id": "txn_dlocal_0285_926e2d62",
+      "gross_amount": "101.41",
+      "net_amount": "97.46",
+      "fees": [
+        {
+          "type": "processing_fee",
+          "amount": "3.95",
+          "description": "dlocal processing fee"
+        }
+      ],
+      "settlement_date": "2026-02-10T12:00:00Z",
+      "processor_reference": "dlocal-ref-e479fc70"
+    },
+    {
+      "transaction_id": "txn_dlocal_0286_6e8f2ec9",
+      "gross_amount": "3484.74",
+      "net_amount": "3348.84",
+      "fees": [
+        {
+          "type": "processing_fee",
+          "amount": "135.90",
+          "description": "dlocal processing fee"
+        }
+      ],
+      "settlement_date": "2026-02-10T12:00:00Z",
+      "processor_reference": "dlocal-ref-2ee59fa6"
+    },
+    {
+      "transaction_id": "txn_dlocal_0308_be138c09",
+      "gross_amount": "3807.37",
+      "net_amount": "3658.88",
+      "fees": [
+        {
+          "type": "processing_fee",
+          "amount": "148.49",
+          "description": "dlocal processing fee"
+        }
+      ],
+      "settlement_date": "2026-02-10T12:00:00Z",
+      "processor_reference": "dlocal-ref-2358c788"
+    },
+    {
+      "transaction_id": "txn_dlocal_0261_4a353a12",
+      "gross_amount": "3070.13",
+      "net_amount": "2950.39",
+      "fees": [
+        {
+          "type": "processing_fee",
+          "amount": "119.74",
+          "description": "dlocal processing fee"
+        }
+      ],
+      "settlement_date": "2026-02-10T12:00:00Z",
+      "processor_reference": "dlocal-ref-673340dc"
+    },
+    {
+      "transaction_id": "txn_dlocal_0265_97c173ad",
+      "gross_amount": "2720.83",
+      "net_amount": "2614.72",
+      "fees": [
+        {
+          "type": "processing_fee",
+          "amount": "106.11",
+          "description": "dlocal processing fee"
+        }
+      ],
+      "settlement_date": "2026-02-10T12:00:00Z",
+      "processor_reference": "dlocal-ref-a9cb95ce"
+    },
+    {
+      "transaction_id": "txn_dlocal_0311_29ec6e14",
+      "gross_amount": "3542.69",
+      "net_amount": "3404.53",
+      "fees": [
+        {
+          "type": "processing_fee",
+          "amount": "138.16",
+          "description": "dlocal processing fee"
+        }
+      ],
+      "settlement_date": "2026-02-10T12:00:00Z",
+      "processor_reference": "dlocal-ref-81de3117"
+    }
+  ],
+  "total_gross": "16727.17",
+  "total_net": "16074.82",
+  "total_fees": "652.35",
+  "reserve_hold_amount": "0.00",
+  "report_generated_at": "2026-02-10T18:00:00Z",
+  "metadata": {
+    "report_version": "2.1",
+    "source": "dlocal-settlement-api"
+  }
+}

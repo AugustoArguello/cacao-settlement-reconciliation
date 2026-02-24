@@ -1,0 +1,31 @@
+{
+  "batch_id": "batch_006",
+  "processor": "adyen",
+  "settlement_date": "2026-02-02T12:00:00Z",
+  "currency": "USD",
+  "transactions": [
+    {
+      "transaction_id": "txn_adyen_0185_b9da964d",
+      "gross_amount": "3402.12",
+      "net_amount": "3316.95",
+      "fees": [
+        {
+          "type": "processing_fee",
+          "amount": "85.17",
+          "description": "adyen processing fee"
+        }
+      ],
+      "settlement_date": "2026-02-02T12:00:00Z",
+      "processor_reference": "adyen-ref-65f5545d"
+    }
+  ],
+  "total_gross": "3402.12",
+  "total_net": "3316.95",
+  "total_fees": "85.17",
+  "reserve_hold_amount": "0.00",
+  "report_generated_at": "2026-02-02T18:00:00Z",
+  "metadata": {
+    "report_version": "2.1",
+    "source": "adyen-settlement-api"
+  }
+}

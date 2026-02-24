@@ -1,0 +1,78 @@
+{
+  "batch_id": "batch_001",
+  "processor": "stripe",
+  "settlement_date": "2026-01-22T12:00:00Z",
+  "currency": "USD",
+  "transactions": [
+    {
+      "transaction_id": "txn_stripe_0052_9e38c314",
+      "gross_amount": "1091.01",
+      "net_amount": "895.42",
+      "fees": [
+        {
+          "type": "processing_fee",
+          "amount": "31.94",
+          "description": "stripe processing fee"
+        },
+        {
+          "type": "chargeback_fee",
+          "amount": "163.65",
+          "description": "chargeback processing fee - disputed transaction"
+        }
+      ],
+      "settlement_date": "2026-01-22T12:00:00Z",
+      "processor_reference": "stripe-ref-a04b5b49"
+    },
+    {
+      "transaction_id": "txn_stripe_0175_59a32de1",
+      "gross_amount": "3545.34",
+      "net_amount": "2514.19",
+      "fees": [
+        {
+          "type": "processing_fee",
+          "amount": "1031.15",
+          "description": "stripe processing fee"
+        }
+      ],
+      "settlement_date": "2026-01-22T12:00:00Z",
+      "processor_reference": "stripe-ref-6e5492dc"
+    },
+    {
+      "transaction_id": "txn_stripe_0150_6f13abb9",
+      "gross_amount": "3531.49",
+      "net_amount": "2504.36",
+      "fees": [
+        {
+          "type": "processing_fee",
+          "amount": "1027.13",
+          "description": "stripe processing fee"
+        }
+      ],
+      "settlement_date": "2026-01-22T12:00:00Z",
+      "processor_reference": "stripe-ref-70de045a"
+    },
+    {
+      "transaction_id": "txn_phantom_0000_fcb5e15d",
+      "gross_amount": "1866.67",
+      "net_amount": "1812.24",
+      "fees": [
+        {
+          "type": "processing_fee",
+          "amount": "54.43",
+          "description": "stripe processing fee"
+        }
+      ],
+      "settlement_date": "2026-01-22T12:00:00Z",
+      "processor_reference": "ORPHAN-6118434a"
+    }
+  ],
+  "total_gross": "10034.51",
+  "total_net": "7726.21",
+  "total_fees": "2308.30",
+  "reserve_hold_amount": "0.00",
+  "report_generated_at": "2026-01-22T18:00:00Z",
+  "metadata": {
+    "report_version": "2.1",
+    "source": "stripe-settlement-api"
+  }
+}
