@@ -27,6 +27,7 @@ func ConfigRouter(e *echo.Echo) {
 	txnCtrl := controllers.NewTransactionController(txnService)
 	stlCtrl := controllers.NewSettlementController(stlService)
 	reconCtrl := controllers.NewReconciliationController(reconcService)
+	feeCtrl := controllers.NewFeeRuleController(feeRepo)
 
 	// Health check
 	e.GET("/health", healthCheck)
@@ -55,6 +56,11 @@ func ConfigRouter(e *echo.Echo) {
 	recon.GET("/reports", reconCtrl.ListReports)
 	recon.GET("/reports/:id", reconCtrl.GetReport)
 	recon.GET("/discrepancies", reconCtrl.ListDiscrepancies)
+
+	// Fee rule endpoints (stretch goal: configurable fee validation)
+	fees := v1.Group("/fee-rules")
+	fees.POST("", feeCtrl.Create)
+	fees.GET("", feeCtrl.List)
 }
 
 func healthCheck(c echo.Context) error {
