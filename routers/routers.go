@@ -14,14 +14,19 @@ func ConfigRouter(e *echo.Echo) {
 	// Initialize repositories
 	txnRepo := memory.NewTransactionRepo()
 	stlRepo := memory.NewSettlementRepo()
+	discRepo := memory.NewDiscrepancyRepo()
+	rptRepo := memory.NewReportRepo()
+	feeRepo := memory.NewFeeRuleRepo()
 
 	// Initialize services
 	txnService := services.NewTransactionService(txnRepo)
 	stlService := services.NewSettlementService(stlRepo)
+	reconcService := services.NewReconciliationService(txnRepo, stlRepo, discRepo, rptRepo, feeRepo)
 
 	// Initialize controllers
 	txnCtrl := controllers.NewTransactionController(txnService)
 	stlCtrl := controllers.NewSettlementController(stlService)
+	reconCtrl := controllers.NewReconciliationController(reconcService)
 
 	// Health check
 	e.GET("/health", healthCheck)
@@ -43,6 +48,13 @@ func ConfigRouter(e *echo.Echo) {
 	stls.POST("/batch", stlCtrl.CreateBatch)
 	stls.GET("", stlCtrl.List)
 	stls.GET("/:id", stlCtrl.GetByBatchID)
+
+	// Reconciliation endpoints
+	recon := v1.Group("/reconciliation")
+	recon.POST("/run", reconCtrl.RunReconciliation)
+	recon.GET("/reports", reconCtrl.ListReports)
+	recon.GET("/reports/:id", reconCtrl.GetReport)
+	recon.GET("/discrepancies", reconCtrl.ListDiscrepancies)
 }
 
 func healthCheck(c echo.Context) error {

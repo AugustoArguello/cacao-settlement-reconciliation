@@ -3,6 +3,7 @@ module github.com/AugustoArguello/cacao-settlement-reconciliation
 go 1.25.1
 
 require (
+	github.com/google/uuid v1.6.0
 	github.com/labstack/echo/v4 v4.15.1
 	github.com/shopspring/decimal v1.4.0
 )
