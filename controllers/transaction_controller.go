@@ -3,9 +3,9 @@ package controllers
 import (
 	"net/http"
 	"strconv"
-	"strings"
 	"time"
 
+	"github.com/AugustoArguello/cacao-settlement-reconciliation/middleware"
 	"github.com/AugustoArguello/cacao-settlement-reconciliation/models"
 	"github.com/AugustoArguello/cacao-settlement-reconciliation/repository"
 	"github.com/AugustoArguello/cacao-settlement-reconciliation/request"
@@ -25,38 +25,12 @@ func NewTransactionController(service *services.TransactionService) *Transaction
 func (ctrl *TransactionController) Create(c echo.Context) error {
 	var req request.CreateTransactionRequest
 	if err := c.Bind(&req); err != nil {
-		return c.JSON(http.StatusBadRequest, response.ErrorResponse{
-			Error: response.ErrorDetail{
-				Code:    "INVALID_JSON",
-				Message: "Failed to parse request body",
-			},
-		})
+		return middleware.NewBadRequestError("Failed to parse request body")
 	}
 
 	txn, err := ctrl.service.Create(c.Request().Context(), req)
 	if err != nil {
-		if strings.Contains(err.Error(), "validation error") {
-			return c.JSON(http.StatusUnprocessableEntity, response.ErrorResponse{
-				Error: response.ErrorDetail{
-					Code:    "VALIDATION_ERROR",
-					Message: err.Error(),
-				},
-			})
-		}
-		if strings.Contains(err.Error(), "already exists") {
-			return c.JSON(http.StatusConflict, response.ErrorResponse{
-				Error: response.ErrorDetail{
-					Code:    "DUPLICATE",
-					Message: err.Error(),
-				},
-			})
-		}
-		return c.JSON(http.StatusInternalServerError, response.ErrorResponse{
-			Error: response.ErrorDetail{
-				Code:    "INTERNAL_ERROR",
-				Message: "Failed to create transaction",
-			},
-		})
+		return err // DomainError handled by CustomHTTPErrorHandler
 	}
 
 	return c.JSON(http.StatusCreated, txn)
@@ -65,31 +39,16 @@ func (ctrl *TransactionController) Create(c echo.Context) error {
 func (ctrl *TransactionController) CreateBatch(c echo.Context) error {
 	var req request.BatchTransactionRequest
 	if err := c.Bind(&req); err != nil {
-		return c.JSON(http.StatusBadRequest, response.ErrorResponse{
-			Error: response.ErrorDetail{
-				Code:    "INVALID_JSON",
-				Message: "Failed to parse request body",
-			},
-		})
+		return middleware.NewBadRequestError("Failed to parse request body")
 	}
 
 	if len(req.Transactions) == 0 {
-		return c.JSON(http.StatusBadRequest, response.ErrorResponse{
-			Error: response.ErrorDetail{
-				Code:    "VALIDATION_ERROR",
-				Message: "transactions array must not be empty",
-			},
-		})
+		return middleware.NewBadRequestError("transactions array must not be empty")
 	}
 
 	ingested, duplicates, invalid, err := ctrl.service.CreateBatch(c.Request().Context(), req)
 	if err != nil {
-		return c.JSON(http.StatusInternalServerError, response.ErrorResponse{
-			Error: response.ErrorDetail{
-				Code:    "INTERNAL_ERROR",
-				Message: "Failed to ingest transactions",
-			},
-		})
+		return err
 	}
 
 	var errors []response.IngestionError
@@ -112,20 +71,10 @@ func (ctrl *TransactionController) GetByID(c echo.Context) error {
 	id := c.Param("id")
 	txn, err := ctrl.service.GetByID(c.Request().Context(), id)
 	if err != nil {
-		return c.JSON(http.StatusInternalServerError, response.ErrorResponse{
-			Error: response.ErrorDetail{
-				Code:    "INTERNAL_ERROR",
-				Message: "Failed to retrieve transaction",
-			},
-		})
+		return err
 	}
 	if txn == nil {
-		return c.JSON(http.StatusNotFound, response.ErrorResponse{
-			Error: response.ErrorDetail{
-				Code:    "NOT_FOUND",
-				Message: "Transaction not found: " + id,
-			},
-		})
+		return middleware.NewNotFoundError("Transaction not found: " + id)
 	}
 	return c.JSON(http.StatusOK, txn)
 }
@@ -168,12 +117,7 @@ func (ctrl *TransactionController) List(c echo.Context) error {
 
 	txns, total, err := ctrl.service.List(c.Request().Context(), filter)
 	if err != nil {
-		return c.JSON(http.StatusInternalServerError, response.ErrorResponse{
-			Error: response.ErrorDetail{
-				Code:    "INTERNAL_ERROR",
-				Message: "Failed to list transactions",
-			},
-		})
+		return err
 	}
 
 	return c.JSON(http.StatusOK, response.PaginatedResponse{

@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/AugustoArguello/cacao-settlement-reconciliation/middleware"
 	"github.com/AugustoArguello/cacao-settlement-reconciliation/models"
 	"github.com/AugustoArguello/cacao-settlement-reconciliation/repository"
 	"github.com/AugustoArguello/cacao-settlement-reconciliation/request"
@@ -19,7 +20,7 @@ func NewSettlementService(repo repository.SettlementRepository) *SettlementServi
 
 func (s *SettlementService) Create(ctx context.Context, req request.CreateSettlementRequest) (*models.SettlementReport, error) {
 	if err := req.Validate(); err != nil {
-		return nil, fmt.Errorf("validation error: %w", err)
+		return nil, middleware.NewValidationError(fmt.Sprintf("validation error: %s", err.Error()))
 	}
 
 	report := req.ToModel()
@@ -28,7 +29,7 @@ func (s *SettlementService) Create(ctx context.Context, req request.CreateSettle
 		return nil, fmt.Errorf("failed to store settlement: %w", err)
 	}
 	if !created {
-		return nil, fmt.Errorf("settlement batch %s already exists", report.BatchID)
+		return nil, middleware.NewDuplicateError(fmt.Sprintf("settlement batch %s already exists", report.BatchID))
 	}
 
 	return &report, nil

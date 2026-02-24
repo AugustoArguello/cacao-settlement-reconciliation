@@ -2,9 +2,9 @@ package controllers
 
 import (
 	"net/http"
-	"strings"
 	"time"
 
+	"github.com/AugustoArguello/cacao-settlement-reconciliation/middleware"
 	"github.com/AugustoArguello/cacao-settlement-reconciliation/models"
 	"github.com/AugustoArguello/cacao-settlement-reconciliation/repository"
 	"github.com/AugustoArguello/cacao-settlement-reconciliation/request"
@@ -24,38 +24,12 @@ func NewSettlementController(service *services.SettlementService) *SettlementCon
 func (ctrl *SettlementController) Create(c echo.Context) error {
 	var req request.CreateSettlementRequest
 	if err := c.Bind(&req); err != nil {
-		return c.JSON(http.StatusBadRequest, response.ErrorResponse{
-			Error: response.ErrorDetail{
-				Code:    "INVALID_JSON",
-				Message: "Failed to parse request body",
-			},
-		})
+		return middleware.NewBadRequestError("Failed to parse request body")
 	}
 
 	report, err := ctrl.service.Create(c.Request().Context(), req)
 	if err != nil {
-		if strings.Contains(err.Error(), "validation error") {
-			return c.JSON(http.StatusUnprocessableEntity, response.ErrorResponse{
-				Error: response.ErrorDetail{
-					Code:    "VALIDATION_ERROR",
-					Message: err.Error(),
-				},
-			})
-		}
-		if strings.Contains(err.Error(), "already exists") {
-			return c.JSON(http.StatusConflict, response.ErrorResponse{
-				Error: response.ErrorDetail{
-					Code:    "DUPLICATE",
-					Message: err.Error(),
-				},
-			})
-		}
-		return c.JSON(http.StatusInternalServerError, response.ErrorResponse{
-			Error: response.ErrorDetail{
-				Code:    "INTERNAL_ERROR",
-				Message: "Failed to create settlement",
-			},
-		})
+		return err // DomainError handled by CustomHTTPErrorHandler
 	}
 
 	return c.JSON(http.StatusCreated, report)
@@ -64,31 +38,16 @@ func (ctrl *SettlementController) Create(c echo.Context) error {
 func (ctrl *SettlementController) CreateBatch(c echo.Context) error {
 	var req request.BatchSettlementRequest
 	if err := c.Bind(&req); err != nil {
-		return c.JSON(http.StatusBadRequest, response.ErrorResponse{
-			Error: response.ErrorDetail{
-				Code:    "INVALID_JSON",
-				Message: "Failed to parse request body",
-			},
-		})
+		return middleware.NewBadRequestError("Failed to parse request body")
 	}
 
 	if len(req.Settlements) == 0 {
-		return c.JSON(http.StatusBadRequest, response.ErrorResponse{
-			Error: response.ErrorDetail{
-				Code:    "VALIDATION_ERROR",
-				Message: "settlements array must not be empty",
-			},
-		})
+		return middleware.NewBadRequestError("settlements array must not be empty")
 	}
 
 	ingested, duplicates, invalid, err := ctrl.service.CreateBatch(c.Request().Context(), req)
 	if err != nil {
-		return c.JSON(http.StatusInternalServerError, response.ErrorResponse{
-			Error: response.ErrorDetail{
-				Code:    "INTERNAL_ERROR",
-				Message: "Failed to ingest settlements",
-			},
-		})
+		return err
 	}
 
 	var errors []response.IngestionError
@@ -111,20 +70,10 @@ func (ctrl *SettlementController) GetByBatchID(c echo.Context) error {
 	batchID := c.Param("id")
 	report, err := ctrl.service.GetByBatchID(c.Request().Context(), batchID)
 	if err != nil {
-		return c.JSON(http.StatusInternalServerError, response.ErrorResponse{
-			Error: response.ErrorDetail{
-				Code:    "INTERNAL_ERROR",
-				Message: "Failed to retrieve settlement",
-			},
-		})
+		return err
 	}
 	if report == nil {
-		return c.JSON(http.StatusNotFound, response.ErrorResponse{
-			Error: response.ErrorDetail{
-				Code:    "NOT_FOUND",
-				Message: "Settlement batch not found: " + batchID,
-			},
-		})
+		return middleware.NewNotFoundError("Settlement batch not found: " + batchID)
 	}
 	return c.JSON(http.StatusOK, report)
 }
@@ -160,12 +109,7 @@ func (ctrl *SettlementController) List(c echo.Context) error {
 
 	reports, total, err := ctrl.service.List(c.Request().Context(), filter)
 	if err != nil {
-		return c.JSON(http.StatusInternalServerError, response.ErrorResponse{
-			Error: response.ErrorDetail{
-				Code:    "INTERNAL_ERROR",
-				Message: "Failed to list settlements",
-			},
-		})
+		return err
 	}
 
 	return c.JSON(http.StatusOK, response.PaginatedResponse{

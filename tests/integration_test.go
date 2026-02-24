@@ -8,6 +8,7 @@ import (
 	"testing"
 
 	"github.com/AugustoArguello/cacao-settlement-reconciliation/controllers"
+	customMw "github.com/AugustoArguello/cacao-settlement-reconciliation/middleware"
 	"github.com/AugustoArguello/cacao-settlement-reconciliation/models"
 	"github.com/AugustoArguello/cacao-settlement-reconciliation/repository/memory"
 	"github.com/AugustoArguello/cacao-settlement-reconciliation/request"
@@ -22,6 +23,7 @@ import (
 
 func setupTestServer() (*echo.Echo, *services.ReconciliationService) {
 	e := echo.New()
+	e.HTTPErrorHandler = customMw.CustomHTTPErrorHandler
 
 	txnRepo := memory.NewTransactionRepo()
 	stlRepo := memory.NewSettlementRepo()

@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/AugustoArguello/cacao-settlement-reconciliation/middleware"
 	"github.com/AugustoArguello/cacao-settlement-reconciliation/models"
 	"github.com/AugustoArguello/cacao-settlement-reconciliation/repository"
 	"github.com/AugustoArguello/cacao-settlement-reconciliation/request"
@@ -19,7 +20,7 @@ func NewTransactionService(repo repository.TransactionRepository) *TransactionSe
 
 func (s *TransactionService) Create(ctx context.Context, req request.CreateTransactionRequest) (*models.Transaction, error) {
 	if err := req.Validate(); err != nil {
-		return nil, fmt.Errorf("validation error: %w", err)
+		return nil, middleware.NewValidationError(fmt.Sprintf("validation error: %s", err.Error()))
 	}
 
 	txn := req.ToModel()
@@ -28,7 +29,7 @@ func (s *TransactionService) Create(ctx context.Context, req request.CreateTrans
 		return nil, fmt.Errorf("failed to store transaction: %w", err)
 	}
 	if !created {
-		return nil, fmt.Errorf("transaction %s already exists", txn.TransactionID)
+		return nil, middleware.NewDuplicateError(fmt.Sprintf("transaction %s already exists", txn.TransactionID))
 	}
 
 	return &txn, nil

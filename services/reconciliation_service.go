@@ -6,6 +6,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/AugustoArguello/cacao-settlement-reconciliation/middleware"
 	"github.com/AugustoArguello/cacao-settlement-reconciliation/models"
 	"github.com/AugustoArguello/cacao-settlement-reconciliation/repository"
 	"github.com/AugustoArguello/cacao-settlement-reconciliation/request"
@@ -72,7 +73,7 @@ func NewReconciliationService(
 
 func (s *ReconciliationService) RunReconciliation(ctx context.Context, req request.RunReconciliationRequest) (*models.ReconciliationReport, error) {
 	if err := req.Validate(); err != nil {
-		return nil, fmt.Errorf("validation error: %w", err)
+		return nil, middleware.NewValidationError(fmt.Sprintf("validation error: %s", err.Error()))
 	}
 
 	// Fetch all transactions and settlements in the period
